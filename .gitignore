@@ -1,0 +1,18 @@
+# Python / tooling
+.venv/
+.cache/
+__pycache__/
+*.pyc
+build/
+dist/
+*.spec.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Student data — never commit (names, IDs, grades)
+*.pdf
+*.xlsx
+NPT*/
+outputs/
