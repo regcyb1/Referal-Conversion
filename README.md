@@ -4,7 +4,36 @@ Convert **Student Assessment Results by Class Code** PDFs into one Excel workboo
 
 Everything runs locally. No internet connection or account is needed.
 
-## Setup
+## For office users (no Python needed)
+
+Download from the repository's **Releases** page (or the latest **Actions → Build apps** run → *Artifacts*):
+
+| Computer | File | How to start |
+|---|---|---|
+| Windows | `Assessment PDF to Excel.exe` | Double-click. First time, Windows may show *"Windows protected your PC"* → **More info** → **Run anyway**. |
+| Mac (Apple Silicon: M1/M2/M3/M4) | `Assessment-PDF-to-Excel-mac.dmg` | Open the .dmg, drag the app onto **Applications**. First time: right-click the app → **Open** → **Open** (or System Settings → Privacy & Security → **Open Anyway**). |
+
+The warnings appear because the app is not signed with a paid Microsoft/Apple developer certificate. Then follow the steps under [Desktop app](#desktop-app), or click **Help** inside the app.
+
+## Building the .exe / .dmg
+
+Automatic: every push to `main` builds both on GitHub (`.github/workflows/build.yml`). To publish a release with both files attached:
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Manual (each must be built on its own operating system):
+
+```sh
+bash installer/build_mac.sh          # macOS -> dist/Assessment-PDF-to-Excel-mac.dmg
+installer\build_windows.bat          # Windows -> dist\Assessment PDF to Excel.exe
+```
+
+The packaged app also works from a terminal with the same options as `convert.py` (e.g. `"Assessment PDF to Excel.exe" FOLDER -o out.xlsx`).
+
+## Setup (running from source)
 
 Python 3.10+ with Tkinter (included in the standard python.org installers).
 
@@ -65,6 +94,8 @@ python verify_samples.py
 
 | File | Purpose |
 |---|---|
+| `app.py` | Entry point for the packaged app |
+| `installer/` | PyInstaller recipe and build scripts |
 | `convert.py` | CLI, batch validation, Excel export |
 | `desktop.py` | Desktop window (Tkinter) |
 | `pdf_extractor.py` | Strict PDF parsing |
